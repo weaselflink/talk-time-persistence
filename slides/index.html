@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<style>
+			.small-table {
+				font-size: 20px;
+			}
+
+			.small-table td {
+				font-family: monospace;
+				border: none !important;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>Handling persistence of date and time</h2>
+				</section>
+				<section>
+					<p>Some data might contain date or time information</p>
+					<pre><code class="kotlin" data-trim>
+						data class CustomerAccount {
+							val birthday: ...
+							val creationTime: ...
+							val billingPeriodEnd: ...
+						}</code></pre>
+				</section>
+				<section>
+					<p>Lots of types to choose from</p>
+					<table class="small-table">
+						<thead>
+							<tr><th>Java</th><th>PostgreSQL</th></tr>
+						</thead>
+						<tbody>
+							<tr><td>java.util.Date</td><td>timestamp [without time zone]</td></tr>
+							<tr><td>java.time.LocalDate</td><td>timestamp with time zone</td></tr>
+							<tr><td>java.time.LocalTime</td><td>date</td></tr>
+							<tr><td>java.time.LocalDateTime</td><td>time [without time zone]</td></tr>
+							<tr><td>java.time.OffsetDateTime</td><td>time with time zone</td></tr>
+							<tr><td>java.time.ZonedDateTime</td><td></td></tr>
+							<tr><td>java.time.Instant</td><td></td></tr>
+						</tbody>
+					</table>
+				</section>
+				<section>
+					<h3>The flow of time</h3>
+				</section>
+				<section>
+					<img alt="" src="time-conversion.svg">
+				</section>
+				<section>
+					<h3>Date and time types in Java</h3>
+				</section>
+				<section>
+					<p><code>java.util.Date</code><br>is effectively deprecated even though many frameworks
+						still support it.</p>
+					<p>It should be replaced by <br><code>java.time.Instant</code><br> where possible.</p>
+				</section>
+				<section data-auto-animate>
+					<p>If you want to know what one of these Java class does, look
+						at the state it holds.</p>
+					<pre><code class="kotlin" data-trim>
+						LocalDate::class.java
+							.declaredFields
+							.filter {
+								!Modifier.isStatic(it.modifiers)
+							}
+							.forEach {
+								println("\t${it.name}: ${it.type.name}")
+							}
+						</code></pre>
+				</section>
+				<section data-auto-animate>
+					<p>If you want to know what one of these Java class does, look
+						at the state it holds.</p>
+					<pre><code class="kotlin" data-trim>
+						java.time.LocalDate:
+								year: int
+								month: short
+								day: short
+
+						java.time.Instant:
+								seconds: long
+								nanos: int
+						</code></pre>
+				</section>
+				<section>
+					<p>Clearly defined point in time. "Machine time".</p>
+					<ul>
+						<li><code>java.util.Date</code> (do not use)</li>
+						<li><code>java.time.Instant</code></li>
+					</ul>
+				</section>
+				<section>
+					<p>Time described by someone. Ambiguous without context. "Human time".</p>
+					<ul>
+						<li><code>java.time.LocalTime</code></li>
+						<li><code>java.time.LocalDateTime</code></li>
+					</ul>
+				</section>
+				<section>
+					<p>Context gives a clearly defined point in time. "Human time with context".</p>
+					<ul>
+						<li><code>java.time.OffsetDateTime</code><br>(LocalDateTime with offset)</li>
+						<li><code>java.time.ZonedDateTime</code><br>(LocalDateTime with offset and zone)</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Date and time types in PostgreSQL</h3>
+				</section>
+				<section>
+					<p>Human time</p>
+					<ul>
+						<li><code>date</code></li>
+						<li><code>time [without time zone]</code></li>
+						<li><code>time with time zone</code><br>(converted to UTC at insertion, <br>may require date for this)</li>
+					</ul>
+				</section>
+				<section>
+					<p>Human time with context</p>
+					<ul>
+						<li><code>timestamp [without time zone]</code><br>(handled like UTC time)</li>
+						<li><code>timestamp with time zone</code><br>(converted to UTC at insertion)</li>
+					</ul>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			Reveal.initialize({
+				hash: true,
+				plugins: [ RevealMarkdown, RevealHighlight ]
+			});
+		</script>
+	</body>
+</html>
