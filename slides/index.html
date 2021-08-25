@@ -118,6 +118,13 @@
 					</ul>
 				</section>
 				<section>
+					<p>Isn't it better to use <code>Instant</code> instead of <code>OffsetDateTime</code>
+						since they both represent an exact moment in time.</p>
+					<p class="fragment">Short answer: Yes!</p>
+					<p class="fragment">Long answer: In some special use case you might need to know
+						the offset of a time (e.g. daytime vs nightime).</p>
+				</section>
+				<section>
 					<h3>Date and time types in PostgreSQL</h3>
 				</section>
 				<section>
@@ -134,6 +141,22 @@
 						<li><code>timestamp [without time zone]</code><br>(handled like UTC time)</li>
 						<li><code>timestamp with time zone</code><br>(converted to UTC at insertion)</li>
 					</ul>
+				</section>
+				<section>
+					<p>PostgreSQL will not persist offset or timezone using <code>timestamp</code> field.</p>
+					<pre><code class="sql" data-trim>
+						CREATE TABLE testy (created timestamp with time zone);
+						INSERT INTO testy VALUES ('2021-01-01 12:00:00+05');
+						SELECT created FROM testy;
+
+						> 2021-01-01 08:00:00+01 -- depends on server time zone
+					</code></pre>
+				</section>
+				<section>
+					<h3>How to decide in a project</h3>
+				</section>
+				<section>
+
 				</section>
 			</div>
 		</div>
