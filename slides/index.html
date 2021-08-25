@@ -106,6 +106,7 @@
 				<section>
 					<p>Time described by someone. Ambiguous without context. "Human time".</p>
 					<ul>
+						<li><code>java.time.LocalDate</code></li>
 						<li><code>java.time.LocalTime</code></li>
 						<li><code>java.time.LocalDateTime</code></li>
 					</ul>
@@ -120,9 +121,11 @@
 				<section>
 					<p>Isn't it better to use <code>Instant</code> instead of <code>OffsetDateTime</code>
 						since they both represent an exact moment in time.</p>
-					<p class="fragment">Short answer: Yes!</p>
-					<p class="fragment">Long answer: In some special use case you might need to know
-						the offset of a time (e.g. daytime vs nightime).</p>
+					<ul>
+						<li class="fragment">Short answer: Yes!</li>
+						<li class="fragment">Long answer: In some special use cases you might need to know
+							the offset of a time (e.g. daytime vs nighttime).</li>
+					</ul>
 				</section>
 				<section>
 					<h3>Date and time types in PostgreSQL</h3>
@@ -143,7 +146,7 @@
 					</ul>
 				</section>
 				<section>
-					<p>PostgreSQL will not persist offset or timezone using <code>timestamp</code> field.</p>
+					<p>PostgreSQL will not persist offset or timezone using timestamp field.</p>
 					<pre><code class="sql" data-trim>
 						CREATE TABLE testy (created timestamp with time zone);
 						INSERT INTO testy VALUES ('2021-01-01 12:00:00+05');
