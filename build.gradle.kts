@@ -3,11 +3,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val junit_version: String by project
-val strikt_version: String by project
+val test_containers_version: String by project
 
 plugins {
     kotlin("jvm")
-    id("com.adarshr.test-logger")
     id("com.github.ben-manes.versions")
 }
 
@@ -19,8 +18,10 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:$junit_version")
-    testImplementation("io.strikt:strikt-core:$strikt_version")
+    implementation("org.slf4j:slf4j-nop:1.7.32")
+    implementation("org.postgresql:postgresql:42.2.23")
+    implementation("org.testcontainers:testcontainers:$test_containers_version")
+    implementation("org.testcontainers:postgresql:$test_containers_version")
 }
 
 tasks.test {
