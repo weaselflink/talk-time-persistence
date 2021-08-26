@@ -22,6 +22,12 @@
 				-moz-tab-size: 4;
 			}
 
+			:not(pre) > code {
+				font-size: smaller;
+				font-weight: bold;
+				color: cadetblue;
+			}
+
 			.reveal h2, .reveal h3, .author {
 				-webkit-text-stroke: 2px black;
 				font-family: Coda, serif;
@@ -53,7 +59,7 @@
 					<p class="author">Stefan Bissell</p>
 				</section>
 				<section>
-					<p>Some data might contain date or time information</p>
+					<p>Data might contain date or time information</p>
 					<pre><code class="kotlin" data-trim>
 						data class CustomerAccount(
 							val birthday: ...
@@ -201,7 +207,7 @@
 						(e.g. a purchase event that is discounted at night) use:</p>
 					<ul>
 						<li><code>java.time.ZonedDateTime</code></li>
-						<li><code>time [without time zone]</code></li>
+						<li><code>timestamp [without time zone]</code></li>
 						<li><code>varchar</code> (zone id as separate column)</li>
 					</ul>
 				</section>
