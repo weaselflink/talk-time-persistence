@@ -176,7 +176,7 @@
 						INSERT INTO testy VALUES ('2021-01-01 12:00:00+05');
 						SELECT created FROM testy;
 
-						> 2021-01-01 08:00:00+01 -- depends on server time zone
+						> 2021-01-01 08:00:00+01 -- depends on DB time zone
 					</code></pre>
 				</section>
 				<section data-background="images/Workers At a Construction Site.jpg" data-background-opacity="0.6">
@@ -194,6 +194,15 @@
 					<ul>
 						<li><code>java.time.LocalDate</code></li>
 						<li><code>date</code></li>
+					</ul>
+				</section>
+				<section>
+					<p>If you really, really need to store a point in time in a time zone specific way<br>
+						(e.g. a purchase event that is discounted at night) use:</p>
+					<ul>
+						<li><code>java.time.ZonedDateTime</code></li>
+						<li><code>time [without time zone]</code></li>
+						<li><code>varchar</code> (zone id as separate column)</li>
 					</ul>
 				</section>
 			</div>
