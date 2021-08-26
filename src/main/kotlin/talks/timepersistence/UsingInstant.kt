@@ -12,9 +12,9 @@ fun main() {
 
     withDb {
         val myTime = Instant.parse("2021-01-01T12:00:03Z")
-            .println()
+            .printIt()
         val asString = formatter.format(myTime)
-            .println()
+            .printIt()
         println()
 
         update("CREATE TABLE testy (my_time timestamp)")
@@ -25,7 +25,7 @@ fun main() {
                 ZonedDateTime
                     .parse(rs.getString(1), formatter)
                     .toInstant()
-                    .println()
+                    .printIt()
             }
         }
         update("DROP TABLE testy")

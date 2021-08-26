@@ -1,3 +1,3 @@
 package talks.timepersistence
 
-fun <T> T.println() = also { println(it) }
+fun <T> T.printIt() = also { println(it) }

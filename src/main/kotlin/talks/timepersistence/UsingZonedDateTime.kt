@@ -12,9 +12,9 @@ fun main() {
     withDb {
         val myTime = ZonedDateTime
             .parse("2021-01-01T12:00:03+11:00[Australia/Sydney]")
-            .println()
+            .printIt()
         val asString = formatter.format(myTime)
-            .println()
+            .printIt()
         println()
 
         update("CREATE TABLE testy (my_time timestamp, my_zone varchar)")
@@ -24,7 +24,7 @@ fun main() {
                 LocalDateTime
                     .parse(rs.getString(1), formatter)
                     .atZone(ZoneId.of(rs.getString(2)))
-                    .println()
+                    .printIt()
             }
         }
         update("DROP TABLE testy")
