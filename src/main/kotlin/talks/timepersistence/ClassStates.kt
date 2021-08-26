@@ -26,15 +26,6 @@ fun main() {
             }
         println()
     }
-
-    LocalDate::class.java
-        .declaredFields
-        .filter {
-            !Modifier.isStatic(it.modifiers)
-        }
-        .forEach {
-            println("\t${it.name}: ${it.type.name}")
-        }
 }
 
 private fun <T> Class<T>.realFields() =

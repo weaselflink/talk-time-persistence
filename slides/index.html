@@ -12,6 +12,29 @@
 
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
 		<style>
+			@font-face {
+				font-family: Coda;
+				src: url(./fonts/Coda-Heavy.ttf);
+			}
+
+			pre {
+				tab-size: 4;
+				-moz-tab-size: 4;
+			}
+
+			.reveal h2, .reveal h3, .author {
+				-webkit-text-stroke: 2px black;
+				font-family: Coda, serif;
+			}
+
+			.reveal h2 {
+				font-size: 1.8em;
+			}
+
+			.reveal h3 {
+				font-size: 1.4em;
+			}
+
 			.small-table {
 				font-size: 20px;
 			}
@@ -25,8 +48,9 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>
+				<section data-background="images/Prague Astronomical Clock.jpg" data-background-opacity="0.6">
 					<h2>Handling persistence of date and time</h2>
+					<p class="author">Stefan Bissell</p>
 				</section>
 				<section>
 					<p>Some data might contain date or time information</p>
@@ -54,13 +78,13 @@
 						</tbody>
 					</table>
 				</section>
-				<section>
+				<section data-background="images/Charles bridge in Prague.jpg" data-background-opacity="0.6">
 					<h3>The flow of time</h3>
 				</section>
 				<section>
 					<img alt="" src="time-conversion.svg">
 				</section>
-				<section>
+				<section data-background="images/Coffee and Laptop.jpg" data-background-opacity="0.6">
 					<h3>Date and time types in Java</h3>
 				</section>
 				<section>
@@ -127,7 +151,7 @@
 							the offset of a time (e.g. daytime vs nighttime).</li>
 					</ul>
 				</section>
-				<section>
+				<section data-background="images/Microprocesor.jpg" data-background-opacity="0.6">
 					<h3>Date and time types in PostgreSQL</h3>
 				</section>
 				<section>
@@ -155,7 +179,7 @@
 						> 2021-01-01 08:00:00+01 -- depends on server time zone
 					</code></pre>
 				</section>
-				<section>
+				<section data-background="images/Workers At a Construction Site.jpg" data-background-opacity="0.6">
 					<h3>How to decide in a project</h3>
 				</section>
 				<section>
